@@ -1,0 +1,31 @@
+
+<div class="posts-wrapper row">
+  <div class="post">
+      <div class="post-head">
+        <div class="user-name"><%=@post.user.user_name%></div>
+      </div>
+      <div class="image center-block">
+        <%= image_tag @post.image.url(:medium)%>
+      </div>
+      <p class="caption">
+        <div class="user-name"><%=@post.user.user_name%></div>
+        <%= @post.caption%></p>
+      <div>
+    <h3>Comments</h3>
+      <%= render @post.comments%>
+        <div>
+         <% if current_user %>
+           <%= render 'comments/form', comment: Comment.new, post: @post %>
+         <% end %>
+      </div>
+      <div class="text-center">
+
+        <% if @post.user.id == current_user.id%>
+          <%= link_to "back", posts_path%> |
+          <%= link_to "edit", edit_post_path(@post)%>
+        <%else%>
+        <%= link_to "back", posts_path%>
+        <%end%>
+      </div>
+  </div>
+</div>
